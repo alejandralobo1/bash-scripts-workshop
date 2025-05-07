@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+read -p "Enter the path: " path
+
+
+if [ -d "$path" ]; then
+  echo "It is a directory."
+elif [ -f "$path" ]; then
+  echo "It is a file."
+  extension="${path##*.}"
+  echo "File extension: $extension"
+else
+  echo "Error: The path is not a valid file or directory."
+fi

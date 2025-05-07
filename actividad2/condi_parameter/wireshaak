@@ -1,0 +1,38 @@
+#!/bin/bash
+
+
+if [ "$#" -ne 2 ]; then
+  echo "Usage: $0 <capture_file.txt|csv> <protocol>"
+  exit 1
+fi
+
+
+file="$1"
+protocol="$2"
+
+
+# Check if file exists
+if [ ! -f "$file" ]; then
+  echo "Error: File does not exist."
+  exit 1
+fi
+
+
+# Check file extension
+if [[ "$file" != *.txt && "$file" != *.csv ]]; then
+  echo "Error: File must be .txt or .csv"
+  exit 1
+fi
+
+
+# Count protocol occurrences (case insensitive)
+count=$(grep -i "$protocol" "$file" | wc -l)
+
+
+if [ "$count" -eq 0 ]; then
+  echo "No occurrences of protocol '$protocol' found."
+else
+  echo "Protocol '$protocol' found in $count lines."
+fi
+
+

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+read -p "Enter the file path: " file
+
+
+if [ ! -e "$file" ]; then
+  echo "Error: File does not exist."
+  exit 1
+fi
+
+
+[ -r "$file" ] && echo "Readable" || echo "Not readable"
+[ -w "$file" ] && echo "Writable" || echo "Not writable"
+[ -x "$file" ] && echo "Executable" || echo "Not executable"

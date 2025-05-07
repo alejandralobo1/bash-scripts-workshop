@@ -1,0 +1,49 @@
+#!/bin/bash
+
+
+# Check if exactly 3 parameters were provided
+if [ "$#" -ne 3 ]; then
+  echo "Error: You must provide an operation and two integer numbers."
+  echo "Usage: $0 <operation> <number1> <number2>"
+  exit 1
+fi
+
+
+operation="$1"
+num1="$2"
+num2="$3"
+
+
+# Check if num1 and num2 are valid integers
+if ! [[ "$num1" =~ ^-?[0-9]+$ && "$num2" =~ ^-?[0-9]+$ ]]; then
+  echo "Error: Both operands must be valid integers."
+  exit 1
+fi
+
+
+# Perform operation
+case "$operation" in
+  add)
+    result=$((num1 + num2))
+    ;;
+  subtract)
+    result=$((num1 - num2))
+    ;;
+  multiply)
+    result=$((num1 * num2))
+    ;;
+  divide)
+    if [ "$num2" -eq 0 ]; then
+      echo "Error: Division by zero is not allowed."
+      exit 1
+    fi
+    result=$((num1 / num2))
+    ;;
+  *)
+    echo "Error: Operation must be add, subtract, multiply, or divide."
+    exit 1
+    ;;
+esac
+
+
+echo "Result: $result"
